@@ -14,13 +14,13 @@ const transporter = nodemailer.createTransport({
 // async..await is not allowed in global scope, must use a wrapper
 const sendWelcomeEmail = async (name, email) => {
   // send mail with defined transport object
-  const info = await transporter.sendMail({
+  const info = transporter.sendMail({
     from: '"Task Manager" <muhammadkassab97@gmail.com>', // sender address
     to: email, // list of receivers
     subject: "Welcome to Task Manager ✔", // Subject line
     text: `Welcome ${name},\n\nWe are glad you decided to try our task manager and hopefully it will help you better manage your time` // plain text body
   });
-  return ("Message sent: %s", info.messageId)
+  //return ("Message sent: %s", info.messageId)
 }
 
 // async..await is not allowed in global scope, must use a wrapper
