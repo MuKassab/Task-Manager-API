@@ -20,6 +20,7 @@ const sendWelcomeEmail = async (name, email) => {
     subject: "Welcome to Task Manager ✔", // Subject line
     text: `Welcome ${name},\n\nWe are glad you decided to try our task manager and hopefully it will help you better manage your time` // plain text body
   });
+  return ("Message sent: %s", info.messageId)
 }
 
 // async..await is not allowed in global scope, must use a wrapper
