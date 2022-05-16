@@ -5,17 +5,16 @@ const nodemailer = require("nodemailer")
 const transporter = nodemailer.createTransport({
     service: "Gmail",
     auth: {
-      user: process.env.ACCOUNT_USERNAME, // generated ethereal user
-      pass: process.env.ACCOUNT_PASSWORD // generated ethereal password
+      user: process.env.ACCOUNT_USERNAME, 
+      pass: process.env.ACCOUNT_PASSWORD 
     }
 })
 
 
-// async..await is not allowed in global scope, must use a wrapper
 const sendWelcomeEmail = async (name, email) => {
   // send mail with defined transport object
   const info = transporter.sendMail({
-    from: '"Task Manager" <muhammadkassab97@gmail.com>', // sender address
+    from: '"Task Manager" ' + process.env.ACCOUNT_USERNAME, // sender address
     to: email, // list of receivers
     subject: "Welcome to Task Manager ✔", // Subject line
     text: `Welcome ${name},\n\nWe are glad you decided to try our task manager and hopefully it will help you better manage your time` // plain text body
@@ -23,11 +22,10 @@ const sendWelcomeEmail = async (name, email) => {
   //return ("Message sent: %s", info.messageId)
 }
 
-// async..await is not allowed in global scope, must use a wrapper
 const sendCancelationEmail =  (name, email) => {
   // send mail with defined transport object
   const info = transporter.sendMail({
-    from: '"Task Manager" <muhammadkassab97@gmail.com>', // sender address
+    from: '"Task Manager" ' + process.env.ACCOUNT_USERNAME, // sender address
     to: email, // list of receivers
     subject: "Task Manager Canceled ❌", // Subject line
     text: `Hello ${name},\n\n\nWe are very sorry that you canceled out service if you want you can reach out to us with what we could have done better.\n\nThanks,\nTask Manager Team.` // plain text body
@@ -39,6 +37,7 @@ module.exports = {
     sendCancelationEmail
 }
 
+//Doing the same job using sendgrid module
 /*const sgMail = require('@sendgrid/mail')
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
